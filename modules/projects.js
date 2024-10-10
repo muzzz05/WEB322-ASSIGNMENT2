@@ -6,6 +6,7 @@ const sectorData = require("../data/sectorData");
 let projects = [];
 
 // Function to initialize the projects array
+// Combining projectData with Sector Information
 function initialize() {
     return new Promise((resolve, reject) => {
         try {
