@@ -36,7 +36,7 @@ app.get('/solutions/projects', (req, res) => {
 
 // GET "/solutions/projects/id-demo" to demonstrate getProjectById
 app.get('/solutions/projects/id-demo', (req, res) => {
-    projectData.getProjectById(9).then(data => res.json(data)).catch(err => res.status(404).send(err));
+    projectData.getProjectById(7).then(data => res.json(data)).catch(err => res.status(404).send(err));
 });
 
 // GET "/solutions/projects/sector-demo" to demonstrate getProjectsBySector
