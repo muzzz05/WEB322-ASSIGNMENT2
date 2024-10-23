@@ -1,45 +1,80 @@
 /********************************************************************************
-*  WEB322 – Assignment 02
-* 
-*  I declare that this assignment is my own work in accordance with Seneca's
-*  Academic Integrity Policy:
-* 
-*  https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
-* 
-*  Name: Muzammil Khan Student ID: 173013228 Date: 2nd October 2024
+* WEB322 – Assignment 03
+*
+* I declare that this assignment is my own work in accordance with Seneca's
+* Academic Integrity Policy:
+*
+* https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
+*
+* Name: Muzammil Khan Student ID: 173013228 Date: 20th October 2024
+*
+* Published URL: ___________________________________________________________
 *
 ********************************************************************************/
-// Import necessary modules
+
 const express = require('express');
-const projectData = require('./modules/projects');
-
-// Create the Express app
 const app = express();
+const path = require('path');
+const projectData = require('./data/projectData.json');
+const sectorData = require('./data/sectorData.json');
 
-// Initialize the project data before starting the server
-projectData.initialize().then(() => {
-    // Start the server once the projects array has been successfully built
-    app.listen(8080, () => console.log('Server running on port 8080'));
-}).catch((err) => {
-    console.error(err);
-});
+// Serve static files
+app.use(express.static('public'));
 
-// GET "/" route to send assignment details
+// Serve Home Page
 app.get('/', (req, res) => {
-    res.send('Assignment 2: Muzammil Khan - 173013228');
+  res.sendFile(path.join(__dirname, 'views/home.html'));
 });
 
-// GET "/solutions/projects" to respond with all the projects
+// Serve About Page
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views/about.html'));
+});
+
+// Serve limited projects for homepage
+app.get('/projects/limited', (req, res) => {
+  const limitedProjects = projectData.slice(0, 3);  // Limit to 3 projects for homepage
+  res.json(limitedProjects);
+});
+
+// Serve all sectors for dropdown
+app.get('/sectors', (req, res) => {
+  const sectors = [...new Set(sectorData.map(s => s.sector_name))];  // Get unique sectors
+  res.json(sectors);
+});
+
+// Serve projects based on sector or all projects
 app.get('/solutions/projects', (req, res) => {
-    projectData.getAllProjects().then(data => res.json(data)).catch(err => res.status(500).send(err));
+  const { sector } = req.query;
+  if (sector) {
+    const filteredProjects = projectData.filter(p => p.sector.toLowerCase() === sector.toLowerCase());
+    if (filteredProjects.length > 0) {
+      res.json(filteredProjects);
+    } else {
+      res.status(404).send('No projects found for this sector.');
+    }
+  } else {
+    res.json(projectData);
+  }
 });
 
-// GET "/solutions/projects/id-demo" to demonstrate getProjectById
-app.get('/solutions/projects/id-demo', (req, res) => {
-    projectData.getProjectById(7).then(data => res.json(data)).catch(err => res.status(404).send(err));
+// Serve individual project by ID
+app.get('/solutions/projects/:id', (req, res) => {
+  const project = projectData.find(p => p.id == req.params.id);
+  if (project) {
+    res.json(project);
+  } else {
+    res.status(404).send('Project not found.');
+  }
 });
 
-// GET "/solutions/projects/sector-demo" to demonstrate getProjectsBySector
-app.get('/solutions/projects/sector-demo', (req, res) => {
-    projectData.getProjectsBySector('agriculture').then(data => res.json(data)).catch(err => res.status(404).send(err));
+// Serve 404 error page for unknown routes
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, 'views/404.html'));
+});
+
+// Start the server
+const HTTP_PORT = process.env.PORT || 8080;
+app.listen(HTTP_PORT, () => {
+  console.log(`Server running on port ${HTTP_PORT}`);
 });

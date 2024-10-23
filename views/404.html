@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/main.css" rel="stylesheet">
+    <title>404</title>
+</head>
+<body>
+    <nav class="navbar bg-neutral-800">
+        <div class="flex-1">
+          <a class="btn btn-ghost normal-case text-xl" href="/">Explore Sectors</a>
+        </div>
+        <div class="flex-none">
+            <ul class="menu menu-horizontal p-0">
+                <li><a class="btn m-1" href="/about">About</a></li>
+                <details class="dropdown">
+                    <summary class="btn m-1">Region</summary>
+                    <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                        <summary>Sector</summary>
+                        <a href="/solutions/projects?sector=industry">Industry</a>
+                        <a href="/solutions/projects?sector=technology">Technology</a>
+                        <a href="/solutions/projects?sector=agriculture">Agriculture</a>
+                    </ul>
+                </details>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mx-auto">
+        <div class="hero">
+            <div class="hero-content text-center grid grid-cols-1 grid-rows-3">
+                <h1 class="text-5xl font-bold">404</h1>
+                <p class="text-xl font-semibold py-6">Page not found. Oops!</p>
+                <a href="/" class="btn btn-warning">Go back home</a>
+            </div>
+        </div>
+    </div>      
+</body>
+</html>

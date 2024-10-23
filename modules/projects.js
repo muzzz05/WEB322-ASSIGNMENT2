@@ -1,18 +1,22 @@
 // Import the data from JSON files
-const projectData = require("../data/projectData");
-const sectorData = require("../data/sectorData");
+const projectData = require("../data/projectData.json");
+const sectorData = require("../data/sectorData.json");
 
 // Prepare to store processed projects
 let projects = [];
 
-// Function to initialize the projects array
-// Combining projectData with Sector Information
+// Function to initialize the projects array by combining project data with sector information
 function initialize() {
     return new Promise((resolve, reject) => {
         try {
+            // Combine each project with its respective sector name
             projectData.forEach(project => {
-                const sector = sectorData.find(s => s.id === project.sector_id).sector_name;
-                projects.push({ ...project, sector });
+                const sector = sectorData.find(s => s.id === project.sector_id);
+                
+                // If a matching sector is found, combine the project with its sector name
+                if (sector) {
+                    projects.push({ ...project, sector: sector.sector_name });
+                }
             });
             resolve();  // Successful initialization
         } catch (error) {
@@ -35,11 +39,11 @@ function getAllProjects() {
 // Function to return a project by ID
 function getProjectById(id) {
     return new Promise((resolve, reject) => {
-        const project = projects.find(p => p.id === id);
+        const project = projects.find(p => p.id === parseInt(id, 10));  // Ensure ID is treated as a number
         if (project) {
             resolve(project);
         } else {
-            reject(`No project was found with with id: ${id}`);
+            reject(`No project was found with id: ${id}`);
         }
     });
 }
@@ -47,7 +51,7 @@ function getProjectById(id) {
 // Function to return projects by sector
 function getProjectsBySector(sector) {
     return new Promise((resolve, reject) => {
-        const result = projects.filter(p => p.sector.toLowerCase().includes(sector.toLowerCase()));
+        const result = projects.filter(p => p.sector.toLowerCase() === sector.toLowerCase());
         if (result.length > 0) {
             resolve(result);
         } else {
