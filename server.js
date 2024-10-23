@@ -8,8 +8,7 @@
 *
 * Name: Muzammil Khan Student ID: 173013228 Date: 20th October 2024
 *
-* Published URL: ___________________________________________________________
-*
+* Published URL: https://web-322-assignment-2.vercel.app/ <-- Using the same vercel link previously used for assignmnet 2.
 ********************************************************************************/
 
 const express = require('express');
