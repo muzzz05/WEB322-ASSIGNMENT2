@@ -63,7 +63,7 @@ app.get('/solutions/projects/:id', (req, res) => {
   if (project) {
     res.json(project);
   } else {
-    res.status(404).send('Project not found.');
+    res.status(404).sendFile(path.join(__dirname, 'views/404.html'));
   }
 });
 
