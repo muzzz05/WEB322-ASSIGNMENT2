@@ -50,7 +50,7 @@ app.get('/solutions/projects', (req, res) => {
     if (filteredProjects.length > 0) {
       res.json(filteredProjects);
     } else {
-      res.status(404).send('No projects found for this sector.');
+      res.status(404).sendFile(path.join(__dirname, 'views/404.html'));
     }
   } else {
     res.json(projectData);
