@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/main.css">
+  <title>Projects</title>
+</head>
+<body>
+  <%- include('partials/navbar', { page: '/solutions/projects' }) %>
+  
+  <section class="container mx-auto my-8">
+    <h1 class="text-4xl font-bold mb-4">Projects</h1>
+    <table class="w-full bg-black-950 text-white-900">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Sector</th>
+          <th>Summary</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% projects.forEach(project => { %>
+          <tr>
+            <td><%= project.title %></td>
+            <td><a href="/solutions/projects?sector=<%= project.sector %>" class="text-blue-500"><%= project.sector %></a></td>
+            <td><%= project.summary_short %></td>
+            <td><a href="/solutions/projects/<%= project.id %>" class="text-blue-500">Details</a></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </section>
+</body>
+</html>

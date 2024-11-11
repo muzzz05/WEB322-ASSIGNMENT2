@@ -7,23 +7,7 @@
   <title>Climate Solutions</title>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="bg-gray-800 p-4">
-    <div class="container mx-auto flex justify-between items-center">
-      <a href="/" class="text-white text-xl font-bold">Climate Solutions</a>
-      <div>
-        <a href="/about" class="text-white mx-2">About</a>
-        <div class="relative inline-block text-left">
-          <details>
-            <summary class="text-white cursor-pointer">Sector</summary>
-            <div id="sectorsDropdown" class="absolute mt-2 w-40 bg-white shadow-lg">
-              <!-- Sectors will be dynamically injected here -->
-            </div>
-          </details>
-        </div>
-      </div>
-    </div>
-  </nav>
+  <%- include('partials/navbar', { page: '' }) %>
 
   <!-- Hero Section -->
   <section class="container mx-auto my-8">

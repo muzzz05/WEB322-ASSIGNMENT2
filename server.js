@@ -1,78 +1,80 @@
 /********************************************************************************
-* WEB322 – Assignment 03
+* WEB322 – Assignment 04
 *
 * I declare that this assignment is my own work in accordance with Seneca's
 * Academic Integrity Policy:
 *
-* https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
+* https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
 *
-* Name: Muzammil Khan Student ID: 173013228 Date: 20th October 2024
+* Name: Muzammil Khan Student ID: 173013228 Date: 11th November 2024
 *
-* Published URL: https://web-322-assignment-2.vercel.app/ <-- Using the same vercel link previously used for assignmnet 2.
+* Published URL: https://vercel.com/muzammil-khans-projects-f1041360/web-322-assignment-2/6h2G5njCK6JQ111hYf5c7h8Sh1c7 <--- Same link, used for the previous assignments
+*
 ********************************************************************************/
 
 const express = require('express');
-const app = express();
 const path = require('path');
+const app = express();
 const projectData = require('./data/projectData.json');
 const sectorData = require('./data/sectorData.json');
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // Serve static files
 app.use(express.static('public'));
 
-// Serve Home Page
+// Home Route
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views/home.html'));
+  res.render('home', { page: '/' });
 });
 
-// Serve About Page
+// About Page
 app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views/about.html'));
+  res.render('about', { page: '/about' });
 });
 
-// Serve limited projects for homepage
+// Limited Projects for Homepage
 app.get('/projects/limited', (req, res) => {
-  const limitedProjects = projectData.slice(0, 3);  // Limit to 3 projects for homepage
+  const limitedProjects = projectData.slice(0, 3);
   res.json(limitedProjects);
 });
 
-// Serve all sectors for dropdown
+// All Sectors for Dropdown
 app.get('/sectors', (req, res) => {
-  const sectors = [...new Set(sectorData.map(s => s.sector_name))];  // Get unique sectors
+  const sectors = [...new Set(sectorData.map(s => s.sector_name))];
   res.json(sectors);
 });
 
-// Serve projects based on sector or all projects
+// Render All Projects Page
 app.get('/solutions/projects', (req, res) => {
   const { sector } = req.query;
-  if (sector) {
-    const filteredProjects = projectData.filter(p => p.sector.toLowerCase() === sector.toLowerCase());
-    if (filteredProjects.length > 0) {
-      res.json(filteredProjects);
-    } else {
-      res.status(404).sendFile(path.join(__dirname, 'views/404.html'));
-    }
+  const filteredProjects = sector ? projectData.filter(p => p.sector.toLowerCase() === sector.toLowerCase()) : projectData;
+
+  if (filteredProjects.length > 0) {
+    res.render('projects', { projects: filteredProjects });
   } else {
-    res.json(projectData);
+    res.render('404');
   }
 });
 
-// Serve individual project by ID
+// Render Individual Project Page
 app.get('/solutions/projects/:id', (req, res) => {
   const project = projectData.find(p => p.id == req.params.id);
+
   if (project) {
-    res.json(project);
+    res.render('project', { project });
   } else {
-    res.status(404).sendFile(path.join(__dirname, 'views/404.html'));
+    res.render('404');
   }
 });
 
-// Serve 404 error page for unknown routes
+// 404 for Unknown Routes
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, 'views/404.html'));
+  res.render('404');
 });
 
-// Start the server
+// Start Server
 const HTTP_PORT = process.env.PORT || 8080;
 app.listen(HTTP_PORT, () => {
   console.log(`Server running on port ${HTTP_PORT}`);
