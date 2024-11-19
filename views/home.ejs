@@ -26,24 +26,28 @@
   </section>
 
   <script>
-    // Fetch the project data dynamically and display 3 cards
+    // Fetch the project data and display cards dynamically
     fetch('/projects/limited')
       .then(response => response.json())
       .then(data => {
         const projectContainer = document.getElementById('projectCards');
-        data.slice(0, 3).forEach(project => {
+        data.forEach(project => {
           const card = document.createElement('div');
           card.classList.add('card', 'p-4', 'shadow-lg');
           card.innerHTML = `
-            <img src="${project.feature_img_url}" alt="${project.title}" class="w-full">
-            <h2 class="text-xl font-bold">${project.title}</h2>
-            <p>${project.summary_short}</p>
-            <a href="/solutions/projects/${project.id}" class="btn mt-4">Learn More</a>
+            <img src="${project.feature_img_url}" alt="${project.title}" class="w-full h-48 object-cover rounded-md">
+            <h2 class="text-xl font-bold mt-2">${project.title}</h2>
+            <p class="mt-2">${project.summary_short}</p>
+            <a href="/solutions/projects/${project.id}" class="btn mt-4 bg-blue-500 text-white py-2 px-4 rounded">Learn More</a>
           `;
           projectContainer.appendChild(card);
         });
+      })
+      .catch(err => {
+        console.error('Error fetching projects:', err);
       });
-
+  
+  
     // Fetch the sectors dynamically and populate the dropdown
     fetch('/sectors')
       .then(response => response.json())

@@ -6,42 +6,46 @@
     <link href="/css/main.css" rel="stylesheet">
     <title>About</title>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-900 text-white">
 
-    <!-- navbar -->
+    <!-- Navbar -->
     <%- include('partials/navbar', { page: '' }) %>
     
+    <!-- Main Container -->
     <div class="container mx-auto py-10">
+        <!-- Hero Section -->
         <div class="hero text-center mb-10">
             <div class="hero-content">
-                <h1 class="text-5xl font-extrabold text-white-900">About</h1>
-                <h2 class="text-xl text-gray-600 mt-2">This page says all about me!</h2>
+                <h1 class="text-5xl font-extrabold text-white">About</h1>
+                <h2 class="text-xl text-gray-300 mt-2">This page says all about me!</h2>
             </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-xl font-semibold">
-            
-                <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
-                    <!-- Image section -->
-                    <div class="flex-shrink-0">
-                        <img class="rounded-lg shadow-lg" src="https://preview.redd.it/txa7pi4kjb071.png?width=770&format=png&auto=webp&s=5b0f3c9d4c28ce59e47e1d4c1e13d744120e2fed" width="400px" alt="Ben 10">
-                    </div>
-            
-                    <!-- Text section -->
-                    <div class="text-center md:pl-6">
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">My name is Muzammil Khan</h2>
-                        <p>I am from Saudi Arabia, currently studying at Seneca Polytechnic.</p>
-                        <h1>The courses I am taking this semester are:</h1>
-                        <ul class="list-disc list-inside mt-3 space-y-2">
-                            <li>OOP345: Object Oriented Programming</li>
-                            <li>SYD366: Software Development Analysis</li>
-                            <li>DBS311: Advanced Database Systems</li>
-                            <li>WEB322: Web Programming Tools & Frameworks</li>
-                            <li>SES228: PULP Fiction - American Crime Stories</li>
-                        </ul>
-                    </div>
-                </div>
+
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <!-- Image Section -->
+            <div class="flex justify-center">
+                <img 
+                    class="rounded-lg shadow-lg" 
+                    src="https://preview.redd.it/txa7pi4kjb071.png?width=770&format=png&auto=webp&s=5b0f3c9d4c28ce59e47e1d4c1e13d744120e2fed" 
+                    width="400px" 
+                    alt="Ben 10"
+                >
             </div>
             
+            <!-- Text Section -->
+            <div class="text-left space-y-6">
+                <h2 class="text-3xl font-bold">My name is Muzammil Khan</h2>
+                <p>I am from Saudi Arabia, currently studying at Seneca Polytechnic.</p>
+                <h3 class="text-2xl font-semibold">The courses I am taking this semester are:</h3>
+                <ul class="list-disc list-inside mt-3 space-y-2">
+                    <li>OOP345: Object Oriented Programming</li>
+                    <li>SYD366: Software Development Analysis</li>
+                    <li>DBS311: Advanced Database Systems</li>
+                    <li>WEB322: Web Programming Tools & Frameworks</li>
+                    <li>SES228: PULP Fiction - American Crime Stories</li>
+                </ul>
+            </div>
         </div>
     </div>      
 

@@ -1,10 +1,33 @@
 <div class="navbar bg-gray-800 p-4">
-    <div class="container mx-auto flex justify-between items-center">
-      <a href="/" class="text-white text-xl font-bold">Climate Solutions</a>
-      <div class="flex items-center space-x-4">
-        <a class="<%= page === '/solutions/projects' ? 'active' : '' %>" href="/solutions/projects">View Projects</a>
-        <a class="<%= page === '/about' ? 'active' : '' %>" href="/about">About</a>
-      </div>
+  <div class="container mx-auto flex justify-between items-center">
+    <!-- Logo / Home Link -->
+    <a href="/" class="text-white text-xl font-bold">Climate Solutions</a>
+    
+    <!-- Navigation Links -->
+    <div class="flex items-center space-x-4">
+      <!-- View Projects Link -->
+      <a 
+        class="<%= page === '/solutions/projects' ? 'active' : '' %> text-white" 
+        href="/solutions/projects"
+      >
+        View Projects
+      </a>
+
+      <!-- Add Project Link -->
+      <a 
+        class="<%= page === '/solutions/addProject' ? 'active' : '' %> text-white" 
+        href="/solutions/addProject"
+      >
+        Add Project
+      </a>
+
+      <!-- About Link -->
+      <a 
+        class="<%= page === '/about' ? 'active' : '' %> text-white" 
+        href="/about"
+      >
+        About
+      </a>
     </div>
   </div>
-  
+</div>
