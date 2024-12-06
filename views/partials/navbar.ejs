@@ -13,14 +13,6 @@
         View Projects
       </a>
 
-      <!-- Add Project Link -->
-      <a 
-        class="<%= page === '/solutions/addProject' ? 'active' : '' %> text-white" 
-        href="/solutions/addProject"
-      >
-        Add Project
-      </a>
-
       <!-- About Link -->
       <a 
         class="<%= page === '/about' ? 'active' : '' %> text-white" 
@@ -28,6 +20,33 @@
       >
         About
       </a>
+
+      
+      <% if (!session.user) { %>
+        <!-- Login Link -->
+        <a 
+          class="<%= page === '/login' ? 'active' : '' %> text-white" 
+          href="/login"
+        >
+          Login
+        </a>
+
+        <!-- Register Link -->
+        <a 
+          class="<%= page === '/register' ? 'active' : '' %> text-white" 
+          href="/register"
+        >
+          Register
+        </a>
+      <% } else { %>
+        <!-- Logout Link -->
+        <a 
+          class="text-white" 
+          href="/logout"
+        >
+          Logout
+        </a>
+      <% } %>
     </div>
   </div>
 </div>

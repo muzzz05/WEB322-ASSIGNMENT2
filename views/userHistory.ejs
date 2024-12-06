@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/main.css">
+  <title>User Login History</title>
+</head>
+<body class="bg-gray-900 text-white">
+
+  <!-- Navbar -->
+  <%- include('partials/navbar', { page: '' }) %>
+
+  <!-- Hero Section -->
+  <section class="container mx-auto my-8 text-center">
+    <h1 class="text-4xl font-bold text-blue-400">User Login History</h1>
+    <p class="mt-4 text-gray-300">Review your recent login activity.</p>
+  </section>
+
+  <!-- Login History Table -->
+  <section class="container mx-auto bg-gray-800 p-8 rounded-lg shadow-lg">
+    <table class="w-full border-collapse border border-gray-700 text-left">
+      <thead>
+        <tr class="bg-gray-700 text-white">
+          <th class="p-4 border border-gray-600">Date & Time</th>
+          <th class="p-4 border border-gray-600">User Agent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% session.user.loginHistory.forEach((log) => { %>
+          <tr class="hover:bg-gray-600">
+            <td class="p-4 border border-gray-600"><%= log.dateTime %></td>
+            <td class="p-4 border border-gray-600"><%= log.userAgent %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </section>
+</body>
+</html>
